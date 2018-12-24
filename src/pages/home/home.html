@@ -1,0 +1,153 @@
+<!-- <ion-header class="head-bgcolor">
+  <ion-navbar style="background:red;">
+    <ion-title>
+    
+  </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding >
+  <div class="head-bgcolor" padding>
+  <label>
+      <input type="text" placeholder="搜索商品名称/品牌" class="home-head-input">
+    </label>
+  </div>
+  <h2>首页</h2>
+  <p>
+    This starter project comes with simple tabs-based layout for apps
+    that are going to primarily use a Tabbed UI.
+  </p>
+  <p>
+    Take a look at the <code>src/pages/</code> directory to add or change tabs,
+    update any existing page or create new pages.
+  </p>
+</ion-content> -->
+
+
+
+<!-- <ion-header>
+  <ion-navbar color="headbgcolor">
+    <ion-title>
+       <input type="text" placeholder="搜索商品名称/品牌" class="home-head-input">
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header>Follow us on Twitter</ion-list-header>
+    <ion-item>
+      <ion-icon name="ionic" item-start></ion-icon>
+      @ionicframework
+    </ion-item>
+  </ion-list>
+  <div ion-button (click)='pushList()'>list</div>
+</ion-content> -->
+
+
+<ion-header>
+    <ion-navbar color="danger">
+      <!-- <ion-title>首页</ion-title> -->
+      <ion-searchbar style="border-radius: 20px;margin-left:10%;width:80%;" (ionInput)="getItems($event)"></ion-searchbar>
+    </ion-navbar>
+  </ion-header>
+  <ion-content>
+  
+    <ion-row *ngIf="spinner1">
+      <ion-col text-center>
+        <ion-spinner></ion-spinner>
+      </ion-col>
+    </ion-row>
+  
+    <ion-slides>
+      <ion-slide *ngFor="let item of slides" (click)="goDetails(item)">
+          <!-- <img src="http://www.jj.com/uploadfile/{{item.adfile}}" alt="" style="height:175px;width:375px;"> -->
+          <img src="{{item.url}}" alt="" style="height:175px;width:375px;">
+        <!-- <div class="cover"></div>
+        <span class="title">{{item.Title}}</span> -->
+      </ion-slide>
+    </ion-slides>
+  
+  
+    <div class="categories">
+      <ion-grid>
+        <ion-row wrap class="catebox-border">
+          <ion-col text-center tappable col-4 *ngFor="let c of category" (click)="goProductList(c.id)" class="catebox-border-right">
+            <img src="{{c.url}}" alt="">
+            <div [class.catetitlecolor1]="c.id===1" [class.catetitlecolor2]="c.id===2" [class.catetitlecolor3]="c.id===3">{{c.title}}</div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  
+    <ion-item-divider>
+        <ion-row justify-content-between>
+        <span class="color-black">商城人气商品</span>
+        <span class="t-header-right">></span>
+       </ion-row>
+    </ion-item-divider>
+    <div class="home-content">
+      <img src="{{selfshopimg.url}}" alt="" class="categoryimg">
+      <div class="product">
+        <ion-row wrap>
+          <ion-col tappable col-4 *ngFor="let p of selfshopproducts" (click)="goDetails(p.id)">
+            <img src="{{p.images}}" alt=""/>
+            <p>{{p.productname}}</p>
+            <div class="list-price buy">
+              <span class="price-new"><i>￥</i>{{p.webprice}}</span>
+              <!-- <i class="del">￥<span>{{p.webprice}}</span></i> -->
+            </div>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+
+    <ion-item-divider>
+        <ion-row justify-content-between>
+        <span class="color-black">亚马逊热销商品</span>
+        <span class="t-header-right">></span>
+       </ion-row>
+    </ion-item-divider>
+    <div class="home-content">
+      <img src="{{amazonimg.url}}" alt="" class="categoryimg">
+      <div class="product">
+        <ion-row wrap>
+          <ion-col tappable col-4 *ngFor="let p of amazonproducts" (click)="goDetails(p.id)">
+            <img src="{{p.images}}" alt=""/>
+            <p>{{p.productname}}</p>
+            <div class="list-price buy">
+              <span class="price-new"><i>￥</i>{{p.webprice}}</span>
+              <!-- <i class="del">￥<span>{{p.webprice}}</span></i> -->
+            </div>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+
+    <!-- <ion-item-divider class="color-black"> 乐天热销商品 <span class="t-header-right">></span></ion-item-divider> -->
+    <ion-item-divider>
+        <ion-row justify-content-between>
+        <span class="color-black">乐天热销商品</span>
+        <span class="t-header-right">></span>
+       </ion-row>
+    </ion-item-divider>
+    <div class="home-content">
+      <img src="{{takutenimg.url}}" alt="" class="cateogryimg">
+      <div class="product">
+        <ion-row wrap>
+          <ion-col tappable col-4 *ngFor="let p of takutenproducts" (click)="goDetails(p.id)">
+            <img src="{{p.images}}" alt=""/>
+            <p>{{p.productname}}</p>
+            <div class="list-price buy">
+              <span class="price-new"><i>￥</i>{{p.webprice}}</span>
+              <!-- <i class="del">￥<span>{{p.webprice}}</span></i> -->
+            </div>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+  
+  </ion-content>
+  
+
+

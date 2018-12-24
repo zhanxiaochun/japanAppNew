@@ -1,0 +1,7 @@
+{
+  "name": "japanApp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
