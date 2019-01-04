@@ -18,10 +18,14 @@ page-product-cart2order {
           font-family: "黑体-简";
         }
       }
+
+      .address-border{
+        background-color:#fff;
+      }
     
       .item-border2 {
         background-color: #fff;
-        padding-bottom:20px;
+        // padding-bottom:20px;
         ion-row {
           padding-top: 10px;
           padding-bottom: 10px;
@@ -67,9 +71,23 @@ page-product-cart2order {
     
       .list-price {
         height: 30px;
-        line-height: 20px;
+        line-height: 30px;
         position: relative;
         bottom: 0;
+        display:flex;
+        justify-content: space-between;
+      }
+      .close-font{
+        font-size:14px;
+        margin-right:3px;
+      }
+      .item-price{
+        display: flex;
+        align-items: center;
+      }
+      .item-price i{
+        font-style:normal;
+        font-size:12px;
       }
       .price-new {
         font-size: 14px;
@@ -114,22 +132,47 @@ page-product-cart2order {
           font-size:16px;
           margin-left:10px;
         }
-        .zongji{
-          height:30px;
-          line-height:40px;
+        // .zongji{
+        //   height:30px;
+        //   line-height:40px;
+        // }
+        // .zongji i {
+        //   font-style: normal;
+        //   font-size: 12px;
+        // }
+        // .otherfee{
+        //   height:20px;
+        //   line-height:10px;
+        //   color:#6F6F6F;
+        //   font-size:13px;
+        // }
+        // .otherfee i{
+        //   font-style: normal;
+        //   font-size: 12px;
+        // }
+        .address-box{
+          width:100%;
+          border:1px dashed blue;
+          line-height:20px;
+          // border-image:url(../../assets/imgs/logo.png) 30 30 round;
         }
-        .zongji i {
-          font-style: normal;
-          font-size: 12px;
+        .icon-box{
+          width:6%;
+          display: flex;
+          align-items: center;
+          justify-content:center;
         }
-        .otherfee{
-          height:20px;
-          line-height:10px;
-          color:#6F6F6F;
-          font-size:13px;
+        .foot-fee{
+          line-height:50px;
         }
-        .otherfee i{
-          font-style: normal;
-          font-size: 12px;
+        .foot-fee i{
+          font-size:14px;
+          font-style:normal;
+        }
+        .color6{
+          color:#ff4633;
+        }
+        .total-font{
+          font-weight: 600;
         }
 }

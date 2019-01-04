@@ -5,6 +5,10 @@ import { ComponentsModule } from '../components/components.module';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
+import { Camera } from '@ionic-native/camera';
+import { FileTransfer } from '@ionic-native/file-transfer';
+// import { File } from '@ionic-native/file';
+
 // import { AboutPage } from '../pages/about/about';
 // import { ContactPage } from '../pages/contact/contact';
 // import { HomePage } from '../pages/home/home';
@@ -32,6 +36,19 @@ import { MemberAddressPageModule } from '../pages/member-address/member-address.
 import { MemberAddressaddPageModule } from '../pages/member-addressadd/member-addressadd.module';
 import { ProductCartPageModule } from '../pages/product-cart/product-cart.module';
 import { ProductCart2orderPageModule } from '../pages/product-cart2order/product-cart2order.module';
+import { MemberAddresscheckPageModule } from '../pages/member-addresscheck/member-addresscheck.module';
+import { PaysuccessPageModule } from '../pages/paysuccess/paysuccess.module';
+import { OrderListPageModule } from '../pages/order-list/order-list.module';
+import { OrderCommentlistPageModule } from '../pages/order-commentlist/order-commentlist.module';
+import { OrderCommentwritePageModule } from '../pages/order-commentwrite/order-commentwrite.module';
+import { NationTransportPageModule } from '../pages/nation-transport/nation-transport.module';
+import { OrderTranslistPageModule } from '../pages/order-translist/order-translist.module';
+import { PurchasePageModule } from '../pages/purchase/purchase.module';
+import { OrderPurchasePageModule } from '../pages/order-purchase/order-purchase.module';
+import { HelpcenterPageModule } from '../pages/helpcenter/helpcenter.module';
+import { HelpcenterDetailPageModule } from '../pages/helpcenter-detail/helpcenter-detail.module';
+import { ProductPurchasePageModule } from '../pages/product-purchase/product-purchase.module';
+import { ProductPurchase2orderPageModule } from '../pages/product-purchase2order/product-purchase2order.module';
 
 @NgModule({
   declarations: [
@@ -61,6 +78,19 @@ import { ProductCart2orderPageModule } from '../pages/product-cart2order/product
     MemberAddressaddPageModule,
     ProductCartPageModule,
     ProductCart2orderPageModule,
+    MemberAddresscheckPageModule,
+    PaysuccessPageModule,
+    OrderListPageModule,
+    OrderCommentlistPageModule,
+    OrderCommentwritePageModule,
+    NationTransportPageModule,
+    OrderTranslistPageModule,
+    PurchasePageModule,
+    OrderPurchasePageModule,
+    HelpcenterPageModule,
+    HelpcenterDetailPageModule,
+    ProductPurchasePageModule,
+    ProductPurchase2orderPageModule,
     // IonicModule.forRoot(MyApp), // 隐藏子页面tabs
     IonicModule.forRoot(MyApp,{
       tabsHideOnSubPages: 'true',
@@ -80,6 +110,9 @@ import { ProductCart2orderPageModule } from '../pages/product-cart2order/product
     StatusBar,
     SplashScreen,
     AppService,
+    Camera,
+    // File,
+    FileTransfer,
     // AppMember,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

@@ -8,6 +8,15 @@
 
   <ion-navbar>
     <ion-title>购物车</ion-title>
+    <ion-buttons end padding-right>
+        <div *ngIf="status == 0;else cartedit">
+            <button (click)="chanagestatus()" style="background-color:#fff;font-size:1.7rem;">管理</button> 
+        </div>
+        <ng-template #cartedit>
+                <button style="background-color:#fff;font-size:1.7rem;">编辑</button> 
+        </ng-template>
+        
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -127,12 +136,23 @@
           <ion-label>全选</ion-label>
           <ion-checkbox [(ngModel)]="type0" (click)="checkall(type0)"></ion-checkbox>
       </ion-item>
-    <ion-row justify-content-between>
-      <div>
-        <div class="zongji">总计：<span class="price-new"><i>{{coin}}</i>138.00</span></div>
-        <div class="otherfee">其他费用：<i>{{coin}}</i>0.00</div>
+      <div *ngIf="status == 0;else delete">
+            <ion-row justify-content-between>
+                <div>
+                    <div class="zongji">总计：<span class="price-new"><i>{{coin}}</i>{{total}}</span></div>
+                    <div class="otherfee">其他费用：<i>{{coin}}</i>0.00</div>
+                </div>
+                <div *ngIf="cartNum > 0;else nocart">
+                    <div class="jiesuan" (click)="confirmOrder()">结算({{cartNum}})</div>
+                </div>
+                <ng-template #nocart>
+                    <div class="nojiesuan">结算(0)</div>
+                </ng-template>
+            </ion-row>
       </div>
-      <div class="jiesuan" (click)="confirmOrder()">结算(2)</div>
-    </ion-row>
+      <ng-template #delete>
+            <div class="jiesuan" (click)="delCart()">删除({{cartNum}})</div>
+      </ng-template>
+    
   </ion-row>
 </ion-footer>

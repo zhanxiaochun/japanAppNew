@@ -68,8 +68,32 @@ export class AppGlobal {
         getCartProduct: '/shopcartapi/get',
         // 改变购物车数量
         updateCartAmount: '/shopcartapi/changeAmount',
+        // 删除购物车
+        deleteCart: '/shopcartapi/delete',
         // 创建订单
         createOrder: '/orderapi/shop',
+        // 获取订单
+        getOrders: '/orderapi/get',
+        // 取消订单
+        cancelOrder: '/orderapi/cancel',
+        // 确认收货
+        receiveConfirm: '/orderapi/confirm',
+        // 删除订单
+        deleteOrder: '/orderapi/delete',
+        // 单个订单信息
+        getOrderinfo: '/orderapi/find',
+        // 发布评论
+        sendComment: '/orderapi/comment',
+        // 获取字典值
+        getDictVal: '/dict4api/find',
+        // 提交转运订单
+        submitTransOrder: '/orderapi/trans',
+        // 提交线下代购
+        submitCustom: '/orderapi/custom',
+        // 获取文章
+        getArticle: '/articleapi/get',
+        // 创建代购订单
+        createPurchaseOrder: '/orderapi/purchase',
     };
 }
 
@@ -123,6 +147,28 @@ export class AppService {
         }
         // console.log(params);
         this.http.post(AppGlobal.domain + url, params)
+            .toPromise()
+            .then(res => {
+                var d = res.json();
+                if (loader) {
+                    loading.dismiss();
+                }
+                callback(d == null ? "[]" : d);
+            }).catch(error => {
+                if (loader) {
+                    loading.dismiss();
+                }
+                this.handleError(error);
+            });
+    }
+
+    httpPost2(url, params, callback, loader: boolean = false) {
+        let loading = this.loadingCtrl.create();
+        if (loader) {
+            loading.present();
+        }
+        // console.log(params);
+        this.http.post('https://japanbuy.jp/crawler2api/start', params)
             .toPromise()
             .then(res => {
                 var d = res.json();

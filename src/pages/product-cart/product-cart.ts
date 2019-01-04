@@ -27,6 +27,9 @@ export class ProductCartPage {
   type0:boolean;
   cartIds: Array<any> = [];
   coin:string;
+  cartNum: Number;
+  total: Number;
+  status: Number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private appService: AppService) {
     this.token = this.appService.getToken();
@@ -35,6 +38,9 @@ export class ProductCartPage {
     this.getCartRatuken();
     this.type1 = this.type2 = this.type3 = this.type0 = false;
     this.coin = AppGlobal.coin;
+    this.cartNum = 0;
+    this.total = 0.00;
+    this.status = 0;
   }
 
   // 获取购物车-商城
@@ -46,21 +52,27 @@ export class ProductCartPage {
     this.appService.httpGet(AppGlobal.API.getCartProduct, params, rs=>{
       console.log(rs);
       if(rs.code == 200){
-        this.cart = rs.data;
-        this.cart['length'] = this.cart.length;
+        this.cart = rs.data['carts'];
+        this.cart['length'] =this.cart.length;
         //
-        this.cart.forEach((val,key) => {
-          this.cart[key]['attr'] = '';
-          this.cart[key]['check'] = false;
-          if(val['propertyX'] != null){
-            console.log(val['propertyX']['attrValueList']);
-            val['propertyX']['attrValueList'].forEach((v,k) => {
-              this.cart[key]['attr'] += v['attrKey']['propertyname']+':'+v['attrValue']+' ';
-            });
-          }         
-        });
+        if(this.cart['length'] > 0){
+          this.cart.forEach((val,key) => {
+            this.cart[key]['attr'] = '';
+            this.cart[key]['check'] = false;
+            if(val['propertyX'] != null){
+              // console.log(val['propertyX']['attrValueList'].length);
+              if(val['propertyX']['attrValueList'].length > 0){
+                val['propertyX']['attrValueList'].forEach((v,k) => {
+                  this.cart[key]['attr'] += v['attrKey']['propertyname']+':'+v['attrValue']+' ';
+                });
+              }
+              
+            }         
+          });
+        }
+        
       }
-      console.log(this.cart);
+      // console.log(this.cart);
     })
   }
 
@@ -73,21 +85,27 @@ export class ProductCartPage {
     this.appService.httpGet(AppGlobal.API.getCartProduct, params, rs=>{
       console.log(rs);
       if(rs.code == 200){
-        this.cart2 = rs.data;
+        this.cart2 = rs.data['carts'];
         this.cart2['length'] = this.cart2.length;
         //
-        this.cart2.forEach((val,key) => {
-          this.cart2[key]['attr'] = '';
-          this.cart2[key]['check'] = false;
-          if(val['property'] != null){
-            console.log(val['property']['attrValueList']);
-            val['property']['attrValueList'].forEach((v,k) => {
-              this.cart2[key]['attr'] += v['attrKey']['propertyname']+':'+v['attrValue']+' ';
-            });
-          }         
-        });
+        if(this.cart2['length'] > 0){
+          this.cart2.forEach((val,key) => {
+            this.cart2[key]['attr'] = '';
+            this.cart2[key]['check'] = false;
+            if(val['propertyX'] != null){
+              // console.log(val['propertyX']['attrValueList'].length);
+              if(val['propertyX']['attrValueList'].length > 0){
+                val['propertyX']['attrValueList'].forEach((v,k) => {
+                  this.cart[key]['attr'] += v['attrKey']['propertyname']+':'+v['attrValue']+' ';
+                });
+              }
+              
+            }         
+          });
+        }
+        
       }
-      console.log(this.cart2);
+      // console.log(this.cart2);
     })
   }
 
@@ -100,19 +118,24 @@ export class ProductCartPage {
     this.appService.httpGet(AppGlobal.API.getCartProduct, params, rs=>{
       console.log(rs);
       if(rs.code == 200){
-        this.cart3 = rs.data;
+        this.cart3 = rs.data['carts'];
         this.cart3['length'] = this.cart3.length;
         //
-        this.cart3.forEach((val,key) => {
-          this.cart3[key]['attr'] = '';
-          this.cart3[key]['check'] = false;
-          if(val['property'] != null){
-            console.log(val['property']['attrValueList']);
-            val['property']['attrValueList'].forEach((v,k) => {
-              this.cart3[key]['attr'] += v['attrKey']['propertyname']+':'+v['attrValue']+' ';
-            });
-          }         
-        });
+        if(this.cart3['length'] > 0){
+          this.cart3.forEach((val,key) => {
+            this.cart3[key]['attr'] = '';
+            this.cart3[key]['check'] = false;
+            if(val['propertyX'] != null){
+              // console.log(val['propertyX']['attrValueList'].length);
+              if(val['propertyX']['attrValueList'].length > 0){
+                val['propertyX']['attrValueList'].forEach((v,k) => {
+                  this.cart[key]['attr'] += v['attrKey']['propertyname']+':'+v['attrValue']+' ';
+                });
+              }   
+            }          
+          });
+        }
+        
       }
       console.log(this.cart3);
     })
@@ -135,7 +158,7 @@ export class ProductCartPage {
         }else if(type == 3){
           this.cart3[key]['amount'] = Number(num) + 1;
         }
-        
+        this.calculate();
       }
     })
   }
@@ -157,6 +180,7 @@ export class ProductCartPage {
         }else if(type == 3){
           this.cart3[key]['amount'] = Number(num) - 1;
         }
+        this.calculate();
       }
     })
   }
@@ -180,7 +204,8 @@ export class ProductCartPage {
     }else{
       this.cartIds.push(id);
     }
-    console.log(this.cartIds);
+    // console.log(this.cartIds);
+    this.calculate();
   }
 
   // 选择商品 - 分类全选
@@ -188,20 +213,30 @@ export class ProductCartPage {
     console.log(type);
     if(cate == 1){
       for(let i = 0; i < this.cart.length; i++){
-        this.cart[i]['check'] = type;
-        this.selectProduct(this.cart[i]['id']);
+        // this.cart[i]['check'] = type;
+        if(this.cart[i]['check'] != type){
+          this.cart[i]['check'] = type;
+          this.selectProduct(this.cart[i]['id']);
+        }
       }
     }else if(cate == 2){
       for(let i = 0; i < this.cart2.length; i++){
-        this.cart2[i]['check'] = type;
-        this.selectProduct(this.cart2[i]['id']);
+        if(this.cart2[i]['check'] != type){
+          this.cart2[i]['check'] = type;
+          this.selectProduct(this.cart2[i]['id']);
+        }
       }
     }else if(cate == 3){
       for(let i = 0; i < this.cart3.length; i++){
-        this.cart3[i]['check'] = type;
-        this.selectProduct(this.cart3[i]['id']);
+        // this.cart3[i]['check'] = type;
+        // this.selectProduct(this.cart3[i]['id']);
+        if(this.cart3[i]['check'] != type){
+          this.cart3[i]['check'] = type;
+          this.selectProduct(this.cart3[i]['id']);
+        }
       }
     }
+    this.calculate();
   }
 
   // 全选
@@ -209,6 +244,7 @@ export class ProductCartPage {
     this.type0 = this.type1 = this.type2 = this.type3 = type;
     if(type){
       // console.log('sd');
+      this.cartIds = [];
       for(let i = 0; i < this.cart.length; i++){
         this.cart[i]['check'] = type;
         this.cartIds.push(this.cart[i]['id']);
@@ -234,28 +270,70 @@ export class ProductCartPage {
       }
     }
     console.log(this.cartIds);
+    this.calculate();
   }
 
-  // // 生成订单
-  // createOrders(){
-  //   let params = {
-  //     token: this.token,
-  //     shopCartIds: this.cartIds.join(','),
-  //     note: ''
-  //   }
-  //   this.appService.httpPost(AppGlobal.API.createOrder, params, rs=>{
-  //     console.log(rs);
-  //     if(rs.code == 200){
-  //       this.appService.alert('success');
-  //     }
-  //   })
-  // }
+  // 总计
+  calculate(){
+    this.total = 0;
+    this.cartNum = this.cartIds.length;
+    for(let i = 0; i < this.cartIds.length; i++){
+      for(let j = 0; j < this.cart.length; j++){
+        if(this.cartIds[i] == this.cart[j]['id']){
+          if(this.cart[j]['propertyX'] != null){
+            this.total = Number(this.total) + Number(this.cart[j]['propertyX']['price']) * Number(this.cart[j]['amount']);
+          }else{
+            this.total = Number(this.total) + Number(this.cart[j]['product']['webprice']) * Number(this.cart[j]['amount']);
+          }
+        }
+      }
+      for(let k = 0; k < this.cart2.length; k++){
+        if(this.cartIds[i] == this.cart2[k]['id']){
+          if(this.cart2[k]['propertyX'] != null){
+            this.total = Number(this.total) + Number(this.cart2[k]['propertyX']['price']) * Number(this.cart2[k]['amount']);
+          }else{
+            this.total = Number(this.total) + Number(this.cart2[k]['product']['webprice']) * Number(this.cart2[k]['amount']);
+          }
+        }
+      }
+      for(let l = 0; l < this.cart3.length; l++){
+        if(this.cartIds[i] == this.cart3[l]['id']){
+          if(this.cart3[l]['propertyX'] != null){
+            this.total = Number(this.total) + Number(this.cart3[l]['propertyX']['price']) * Number(this.cart3[l]['amount']);
+          }else{
+            this.total = Number(this.total) + Number(this.cart3[l]['product']['webprice']) * Number(this.cart3[l]['amount']);
+          }
+        }
+      }
+    }
+  }
 
   // 确认订单
   confirmOrder(){
     this.navCtrl.push(ProductCart2orderPage,{
       ids:this.cartIds
     });
+  }
+
+  // 编辑
+  chanagestatus(){
+    this.status = 1;
+    console.log(this.status);
+  }
+
+  // 删除购物车
+  delCart(){
+    console.log(this.cartIds);
+    let params = {
+      token: this.token,
+      id: this.cartIds.join(',')
+    }
+    this.appService.httpPost(AppGlobal.API.deleteCart, params, rs=>{
+      console.log(rs);
+      if(rs.code == 200){
+        this.appService.alert('删除成功');
+      }
+    })
   }
 
   ionViewDidLoad() {
