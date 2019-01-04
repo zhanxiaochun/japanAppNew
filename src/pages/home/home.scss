@@ -237,6 +237,39 @@ page-home {
         padding-left:15px;
         padding-right:15px;
       }
-    
 
+      .head{
+        color:#fff;
+        // padding-top:65px;
+        height:65px;
+        padding-top:26px;
+      }
+      .toolbar-ios {
+        padding: 0px;
+      }
+    
+      .icon{
+        background: none!important;
+        font-size:24px!important;
+      }
+      .font-size24{
+        font-size:20px!important;
+      }
+      .search-box{
+        height:30px;width:75%;background:#fff;margin-bottom:10px;
+        border-radius: 15px;
+        padding-left:15px;
+        padding-right:15px;
+        border:none;
+        color:#000;
+        display:flex;
+        align-items: center;
+      }
+      .search-input{
+        width:80%;
+        border:none;
+        height:28px;
+        color:#000;
+        font-size:12px;
+      }
 }

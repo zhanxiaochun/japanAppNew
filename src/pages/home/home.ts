@@ -4,6 +4,7 @@ import { AppService, AppGlobal } from './../../app/app.service';
 
 import { ListPage } from '../list/list';
 import { ProductDetailPage } from '../product-detail/product-detail';
+import { ProductCartPage } from '../product-cart/product-cart';
 
 @IonicPage()
 @Component({
@@ -143,6 +144,11 @@ export class HomePage {
     this.navCtrl.push(ProductDetailPage, {
       pid:id
     })
+  }
+
+  // 购物车
+  goCart(){
+    this.navCtrl.push(ProductCartPage);
   }
 
 

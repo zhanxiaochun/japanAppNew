@@ -1,54 +1,22 @@
-<!-- <ion-header class="head-bgcolor">
-  <ion-navbar style="background:red;">
-    <ion-title>
-    
-  </ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content padding >
-  <div class="head-bgcolor" padding>
-  <label>
-      <input type="text" placeholder="搜索商品名称/品牌" class="home-head-input">
-    </label>
-  </div>
-  <h2>首页</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
-</ion-content> -->
-
-
-
-<!-- <ion-header>
-  <ion-navbar color="headbgcolor">
-    <ion-title>
-       <input type="text" placeholder="搜索商品名称/品牌" class="home-head-input">
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content>
-  <ion-list>
-    <ion-list-header>Follow us on Twitter</ion-list-header>
-    <ion-item>
-      <ion-icon name="ionic" item-start></ion-icon>
-      @ionicframework
-    </ion-item>
-  </ion-list>
-  <div ion-button (click)='pushList()'>list</div>
-</ion-content> -->
-
 
 <ion-header>
     <ion-navbar color="danger">
+        <div style="background: linear-gradient(to right, #FF4633, #FF7454);" class="head">
+          <!-- <div style="height:30px;width:70%;background:#fff;margin-bottom:10px;"></div> -->
+          <ion-row justify-content-between padding-left padding-right>
+              <div><ion-icon class="iconfont ml-10" style="font-size:22px!important;visibility: hidden;">&#xe616;</ion-icon></div>
+              <div class="search-box"><ion-icon name="search" style="font-size:20px!important;color:#999999;padding-left:0px;"></ion-icon><input type="text" class="search-input"></div>
+              <!-- <input type="text" class="search-box"> -->
+              <div (click)="goCart()"><ion-icon class="iconfont ml-10" style="font-size:22px!important;">&#xe616;</ion-icon></div>
+          </ion-row>
+        </div>
       <!-- <ion-title>首页</ion-title> -->
-      <ion-searchbar style="border-radius: 20px;margin-left:10%;width:80%;" (ionInput)="getItems($event)"></ion-searchbar>
+      <!-- <ion-searchbar style="border-radius: 20px;margin-left:10%;width:80%;" (ionInput)="getItems($event)"></ion-searchbar> -->
+      <!-- <ion-buttons end padding-right>
+          <button (click)="gocart()" style="background-color:#fff;">
+            <ion-icon name="ios-cart-outline" style="font-size:20px;"></ion-icon>
+          </button> 
+      </ion-buttons> -->
     </ion-navbar>
   </ion-header>
   <ion-content>
@@ -60,7 +28,7 @@
     </ion-row>
   
     <ion-slides>
-      <ion-slide *ngFor="let item of slides" (click)="goDetails(item)">
+      <ion-slide *ngFor="let item of slides">
           <!-- <img src="http://www.jj.com/uploadfile/{{item.adfile}}" alt="" style="height:175px;width:375px;"> -->
           <img src="{{item.url}}" alt="" style="height:175px;width:375px;">
         <!-- <div class="cover"></div>
