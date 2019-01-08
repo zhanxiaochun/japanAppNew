@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AppService, AppGlobal } from '../../app/app.service';
+// import { AppService, AppGlobal } from '../../app/app.service';
+import { AppService } from '../../app/app.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ProductPurchase2orderPage } from '../product-purchase2order/product-purchase2order';
 

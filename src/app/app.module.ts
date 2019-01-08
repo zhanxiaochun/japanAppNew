@@ -6,8 +6,9 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 import { Camera } from '@ionic-native/camera';
+import { ImagePicker } from '@ionic-native/image-picker';
 import { FileTransfer } from '@ionic-native/file-transfer';
-// import { File } from '@ionic-native/file';
+import { File } from '@ionic-native/file';
 
 // import { AboutPage } from '../pages/about/about';
 // import { ContactPage } from '../pages/contact/contact';
@@ -111,8 +112,9 @@ import { ProductPurchase2orderPageModule } from '../pages/product-purchase2order
     SplashScreen,
     AppService,
     Camera,
-    // File,
+    ImagePicker,
     FileTransfer,
+    File,
     // AppMember,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
